@@ -3,14 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PokedexDashboardModule } from './pokedex-dashboard/pokedex-dashboard.module';
+import { PokedexContainerComponent } from './pokedex-container/pokedex-container.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PokedexContainerComponent
   ],
   imports: [
+    //angular modules
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    //custom modules
+    PokedexDashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

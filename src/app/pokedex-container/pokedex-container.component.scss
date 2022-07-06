@@ -1,0 +1,14 @@
+.container {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    clear: both;
+    &.pokedex {
+        margin: 0 auto;
+        background: #fff url("https://assets.pokemon.com/static2/_ui/img/chrome/container_bg.png");
+        overflow: hidden;
+        max-width: 1280px;
+
+    }
+}
