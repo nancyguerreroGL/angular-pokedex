@@ -1,8 +1,5 @@
-<ul class="pokemon-results">
-    <li class="pokemon-figure" *ngFor="let pokemon of pokemonDetail">
+<ul class="pokemon-results flex flex-wrap justify-center w-4/5 mx-auto">
+    <li class="pokemon-figure basis-1/5" *ngFor="let pokemon of pokemonDetail">
         <pokemon-detail [detail]="pokemon"></pokemon-detail>
-        <div class="pokemon-detail">
-            <h5>{{pokemon.name}}</h5>
-        </div>
     </li>
 </ul>

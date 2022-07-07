@@ -15,4 +15,8 @@ export class PokemonDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getAbilitie(ability: any){
+    return ability.type ? ability.type.name: null
+  }
+
 }

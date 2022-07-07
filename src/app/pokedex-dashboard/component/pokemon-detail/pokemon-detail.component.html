@@ -1,5 +1,15 @@
 <div class="pokemon-detail">
-    <figure>
-        <img [src]="detail?.imageUrl">
-    </figure>
+    <div class="pokemon-image">
+        <figure>
+            <img [src]="detail?.imageUrl">
+        </figure>
+    </div>
+    <div class="pokemon-info">
+        <h5 class="text-xl">{{detail?.name}}</h5>
+    </div>
+    <div class="pokemon-abilities">
+        <div *ngFor="let abilitie of detail?.types">
+            <span [className]="'pill background-color__' + getAbilitie(abilitie)">{{ getAbilitie(abilitie) }}</span>
+        </div>
+    </div>
 </div>
