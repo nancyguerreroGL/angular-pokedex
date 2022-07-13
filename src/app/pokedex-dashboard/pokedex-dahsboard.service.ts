@@ -7,17 +7,22 @@ import { catchError, map, mergeMap, retry, switchMap, tap } from 'rxjs/operators
 
 const POKEDEX_API = 'https://pokeapi.co/api/v2/pokemon/';
 const POKEDEX_IMAGE_BASE_URL = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"
+const POKEDEX_IMAGE_BASE_FULL = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/"
 const POKEDEX_IMAGE_FORMAT = '.png';
-const getImageZeroDigit = (value: string) => {
-    return value.length < 2? `${POKEDEX_IMAGE_BASE_URL}00${value}`: `${POKEDEX_IMAGE_BASE_URL}0${value}`
+
+const baseImgUrl = (isFullImg: boolean) => isFullImg ? POKEDEX_IMAGE_BASE_FULL: POKEDEX_IMAGE_BASE_URL;
+
+const getImageZeroDigit = (value: string, isFullImg: boolean) => {
+    const baseImg =  baseImgUrl(isFullImg);
+    return value.length < 2? `${baseImg}00${value}`: `${baseImg}0${value}`
 };
 
-const getPokedex_image_base_number = (value: number) => {
+const getPokedex_image_base_number = (value: number, isFullImg: boolean) => {
     const convertId = value.toString();
     if(convertId.length < 3) {
-        return getImageZeroDigit(convertId)
+        return getImageZeroDigit(convertId, isFullImg)
     }
-    return `${POKEDEX_IMAGE_BASE_URL}`;
+    return baseImgUrl(isFullImg);
 };
 
 @Injectable()
@@ -33,7 +38,7 @@ export class PokedexDashboardService {
                 map((item: any) => {
                     return {
                         ...item,
-                        imageUrl: `${getPokedex_image_base_number(item.id)}${POKEDEX_IMAGE_FORMAT}`
+                        imageUrl: `${getPokedex_image_base_number(item.id, false)}${POKEDEX_IMAGE_FORMAT}`
                     }
                 })
             ));
@@ -53,6 +58,7 @@ export class PokedexDashboardService {
                 console.log('item', item)
                 return {
                     ...item,
+                    imageUrl: `${getPokedex_image_base_number(item.id, true)}${POKEDEX_IMAGE_FORMAT}`
                 }
             })
         );

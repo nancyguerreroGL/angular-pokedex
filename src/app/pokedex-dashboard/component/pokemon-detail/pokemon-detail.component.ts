@@ -12,6 +12,7 @@ import { Observable, switchMap } from 'rxjs';
 export class PokemonDetailComponent implements OnInit {
 
   pokemon$!: Observable<PokemonDetail>
+  pokemon!: PokemonDetail;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,15 +21,12 @@ export class PokemonDetailComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-   this.route.paramMap.pipe(
+   this.pokemon$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         const name = params.get('name')!
         const id = params.get('id')!
         return this.service.getPokemonDetail(name, id)
       }))
-     .subscribe((data: PokemonDetail) =>{
-        console.log('dataPokemon', data)
-     })
   }
 
   gotoPokemon(pokemon: PokemonDetail) {

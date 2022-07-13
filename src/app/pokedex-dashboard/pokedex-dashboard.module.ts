@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 //services 
 import {PokedexDashboardService} from './pokedex-dahsboard.service';
 import { PokemonDetailComponent } from './component/pokemon-detail/pokemon-detail.component';
+import { PokemonAbilityInfoComponent } from './component/pokemon-ability-info/pokemon-ability-info.component';
 
 const ROUTES: Routes = [
   {
@@ -24,7 +25,8 @@ const ROUTES: Routes = [
   declarations: [
     PokedexlistComponent,
     PokemonCardComponent,
-    PokemonDetailComponent
+    PokemonDetailComponent,
+    PokemonAbilityInfoComponent
   ],
   imports: [
     CommonModule,
