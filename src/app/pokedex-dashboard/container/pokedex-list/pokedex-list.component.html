@@ -1,0 +1,14 @@
+
+    <ul class="flex flex-wrap justify-center mx-auto">
+        <li class="pokemon-figure basis-1/5" *ngFor="let pokemon of pokemonDetail">
+            <a>
+              <pokemon-card
+              (view)="handleView(pokemon)"
+              [detail]="pokemon"></pokemon-card>
+           </a>
+        </li>
+    </ul>
+
+
+
+<router-outlet></router-outlet>

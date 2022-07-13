@@ -1,25 +1,39 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PokedexDashboardComponent } from './container/pokedex-dashboard/pokedex-dashboard.component';
-import { PokemonDetailComponent } from './component/pokemon-detail/pokemon-detail.component';
+import { RouterModule, Routes } from '@angular/router';
+import { PokedexlistComponent } from './container/pokedex-list/pokedex-list.component';
+import { PokemonCardComponent } from './component/pokemon-card/pokemon-card.component';
 import { HttpClientModule } from '@angular/common/http';
 
 //services 
-import {PokedexDashboardService} from './passenger-dahsboard.service'
+import {PokedexDashboardService} from './pokedex-dahsboard.service';
+import { PokemonDetailComponent } from './component/pokemon-detail/pokemon-detail.component';
 
+const ROUTES: Routes = [
+  {
+    path: 'pokedex',
+    children: [
+      {path: '', component: PokedexlistComponent, pathMatch:'full'},
+      {path:':name/:id', component: PokemonDetailComponent, data: { animation: 'hero' }}
+    ]
+  }
+]
 
 
 @NgModule({
   declarations: [
-    PokedexDashboardComponent,
+    PokedexlistComponent,
+    PokemonCardComponent,
     PokemonDetailComponent
   ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forChild(ROUTES)
   ],
   exports: [
-    PokedexDashboardComponent
+    PokedexlistComponent,
+    PokemonCardComponent
   ],
   providers: [
     PokedexDashboardService
