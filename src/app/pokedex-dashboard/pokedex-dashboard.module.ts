@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {PokedexDashboardService} from './pokedex-dahsboard.service';
 import { PokemonDetailComponent } from './component/pokemon-detail/pokemon-detail.component';
 import { PokemonAbilityInfoComponent } from './component/pokemon-ability-info/pokemon-ability-info.component';
+import { WeightPipe } from './component/pokemon-ability-info/pipes/weight-pipe.pipe';
+import { HeightPipe } from './component/pokemon-ability-info/pipes/height.pipe';
 
 const ROUTES: Routes = [
   {
@@ -26,7 +28,9 @@ const ROUTES: Routes = [
     PokedexlistComponent,
     PokemonCardComponent,
     PokemonDetailComponent,
-    PokemonAbilityInfoComponent
+    PokemonAbilityInfoComponent,
+    WeightPipe,
+    HeightPipe
   ],
   imports: [
     CommonModule,

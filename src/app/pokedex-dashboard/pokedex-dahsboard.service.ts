@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse} from '@angular/common/http';
-import { Pokemon, abilitie, PokemonDetail } from './models/pokemon.interface';
+import { HttpClient} from '@angular/common/http';
+import { Pokemon, abilitie, PokemonDetail, Pokemon_Sepecies } from './models/pokemon.interface';
 import { forkJoin, Observable, throwError } from 'rxjs';
 import { HttpErrorHandler, HandleError } from '../../http-error-handler.service';
 import { catchError, map, mergeMap, retry, switchMap, tap } from 'rxjs/operators';
 
 const POKEDEX_API = 'https://pokeapi.co/api/v2/pokemon/';
-const POKEDEX_IMAGE_BASE_URL = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"
-const POKEDEX_IMAGE_BASE_FULL = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/"
+const POKEDEX_IMAGE_BASE_URL = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/";
+const POKEDEX_IMAGE_BASE_FULL = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/";
+const POKEMON_SPECIES = "https://pokeapi.co/api/v2/pokemon-species/";
 const POKEDEX_IMAGE_FORMAT = '.png';
 
 const baseImgUrl = (isFullImg: boolean) => isFullImg ? POKEDEX_IMAGE_BASE_FULL: POKEDEX_IMAGE_BASE_URL;
@@ -52,16 +53,21 @@ export class PokedexDashboardService {
     };
 
     getPokemonDetail(name: string, id: any): Observable<PokemonDetail> {
-        console.log('id on service', id)
         return this.http.get(`${POKEDEX_API}${name}`).pipe(
             map((item: any) => {
-                console.log('item', item)
                 return {
                     ...item,
                     imageUrl: `${getPokedex_image_base_number(item.id, true)}${POKEDEX_IMAGE_FORMAT}`
                 }
             })
         );
+    }
+
+    getPokemonSpecies(name:string): Observable<Pokemon_Sepecies> {
+     return this.http.get(`${POKEMON_SPECIES}${name}`)
+     .pipe(
+         map((item: any)=> item)
+     )
     }
 }
 

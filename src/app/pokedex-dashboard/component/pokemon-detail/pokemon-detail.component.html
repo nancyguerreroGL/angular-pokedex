@@ -2,8 +2,8 @@
     <h1>{{pokemon.name}}</h1>
 
     <div class="pokedex-pokemon-profile flex">
-        <div class="pokedex-pokemon-image"><img src="{{pokemon.imageUrl}}"></div>
-        <div class="pokemon-abilty-info flex">
+        <div class="pokedex-pokemon-image flex-1 m-2.5"><img src="{{pokemon.imageUrl}}"></div>
+        <div class="flex-1 bg-sky-600 rounded-md self-baseline m-2.5">
             <pokemon-ability-info [pokemonInfo]="pokemon"></pokemon-ability-info>
         </div>
     </div>

@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0");
+.pokemon-abilty-info {
+    .abilities_list {
+        span {
+            &:after {
+                font-family: "Flexo-Bold",arial,sans-serif;
+                background: #fff;
+                border-radius: 16px;
+                color: #30a7d7;
+                content: "?";
+                font-size: 75.5%;
+                height: 16px;
+                line-height: 140%;
+                margin: 0.25em 0 0 0.75em;
+                position: absolute;
+                text-align: center;
+                width: 16px;
+            }
+        }
+    }
+}

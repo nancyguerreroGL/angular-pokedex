@@ -18,7 +18,7 @@ import { AuthModule } from './auth/auth.module';
     AppRoutingModule,
     //custom modules
     PokedexDashboardModule,
-    AuthModule
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

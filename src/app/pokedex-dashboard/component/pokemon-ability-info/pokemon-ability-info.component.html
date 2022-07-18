@@ -1,9 +1,26 @@
-<div>
-    <p>Height</p>
-    <p>{{pokemonInfo.height}}</p>
-</div>
-<div>
-    <p>Weight</p>
-    <p>{{pokemonInfo.weight}}</p>
-   
+<div class="pokemon-abilty-info flex flex-1 p-5">
+    <div class="flex-1" *ngIf="(pokemonSpecie$ | async) as pokemon">
+        <div class="mb-2">
+            <p class="text-white mb-2">Height</p>
+            <p>{{pokemonInfo.height | height}}</p>
+        </div>
+        <div class="mb-2">
+            <p class="text-white mb-2">Weight</p>
+            <p>{{pokemonInfo.weight | weightPipe }}</p>
+        </div>
+        <div class="mb-2">
+            <p class="text-white mb-2">Gender</p>
+            <ng-container *ngFor="let pokemonGender of buildGender(pokemon.gender_rate, pokemon.has_gender_differences)">
+                <span [className]="pokemonGender.class">
+                    {{pokemonGender.gender}}
+                </span>
+            </ng-container>
+        </div>
+    </div>
+    <div class="flex-1 mb-2 abilities_list">
+        <p class="text-white mb-2">Abilities</p>
+        <div class="mb-2 flex" *ngFor="let ability of pokemonInfo.abilities">
+            {{ability.ability.name}} <span></span>
+        </div>
+    </div>
 </div>
