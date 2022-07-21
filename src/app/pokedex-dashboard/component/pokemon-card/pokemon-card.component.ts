@@ -24,6 +24,4 @@ export class PokemonCardComponent implements OnInit {
  goToPokemon(detail: PokemonDetail | undefined) {
     this.view.emit(detail)
   }
-
-
 }

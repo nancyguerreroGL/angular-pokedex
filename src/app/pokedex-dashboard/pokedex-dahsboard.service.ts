@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ElementRef } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Pokemon, abilitie, PokemonDetail, Pokemon_Sepecies } from './models/pokemon.interface';
 import { forkJoin, Observable, throwError } from 'rxjs';
@@ -11,11 +11,11 @@ const POKEDEX_IMAGE_BASE_FULL = "https://assets.pokemon.com/assets/cms2/img/poke
 const POKEMON_SPECIES = "https://pokeapi.co/api/v2/pokemon-species/";
 const POKEDEX_IMAGE_FORMAT = '.png';
 
-const baseImgUrl = (isFullImg: boolean) => isFullImg ? POKEDEX_IMAGE_BASE_FULL: POKEDEX_IMAGE_BASE_URL;
+const baseImgUrl = (isFullImg: boolean) => isFullImg ? `${POKEDEX_IMAGE_BASE_FULL}`: `${POKEDEX_IMAGE_BASE_URL}`;
 
-const getImageZeroDigit = (value: string, isFullImg: boolean) => {
+const getImageZeroDigit = (id: string, isFullImg: boolean) => {
     const baseImg =  baseImgUrl(isFullImg);
-    return value.length < 2? `${baseImg}00${value}`: `${baseImg}0${value}`
+    return id.length < 2? `${baseImg}00${id}`: `${baseImg}0${id}`
 };
 
 const getPokedex_image_base_number = (value: number, isFullImg: boolean) => {
@@ -23,16 +23,15 @@ const getPokedex_image_base_number = (value: number, isFullImg: boolean) => {
     if(convertId.length < 3) {
         return getImageZeroDigit(convertId, isFullImg)
     }
-    return baseImgUrl(isFullImg);
+    return `${baseImgUrl(isFullImg)}${convertId}`;
 };
 
 @Injectable()
 export class PokedexDashboardService {
     constructor(private http: HttpClient){}
-    getPokemon(): Observable<any> {
-
+    getPokemon(url: any): Observable<any> {
         // get the items
-       return this.http.get<Pokemon>(POKEDEX_API).pipe(
+       return this.http.get<Pokemon>(url).pipe(
             switchMap((items) => {
             const results = items.results
             const itemRequests = results.map((item) => this.http.get(`${POKEDEX_API}${item.name}`).pipe(
@@ -45,7 +44,11 @@ export class PokedexDashboardService {
             ));
             return forkJoin(itemRequests).pipe(
                 map((itemRequests) => {
-                    return itemRequests
+                    return {
+                        next: items.next,
+                        results: itemRequests,
+                        previous: items.previous
+                    }
                 })
             );
             })
@@ -69,5 +72,7 @@ export class PokedexDashboardService {
          map((item: any)=> item)
      )
     }
+    
+
 }
 

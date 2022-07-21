@@ -32,8 +32,6 @@ export class PokemonAbilityInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.pokemonSpecie$ = this.service.getPokemonSpecies(this.pokemonInfo.name)
-    console.log('pokemonSpecie$', this.pokemonSpecie$ )
-
   }
 
 buildSingleGender(gender_rate: number) {

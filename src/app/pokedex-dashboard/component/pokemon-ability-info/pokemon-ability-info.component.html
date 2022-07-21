@@ -1,4 +1,4 @@
-<div class="pokemon-abilty-info flex flex-1 p-5">
+<div class="pokemon-abilty-info flex flex-1 p-5 rounded-md self-baseline">
     <div class="flex-1" *ngIf="(pokemonSpecie$ | async) as pokemon">
         <div class="mb-2">
             <p class="text-white mb-2">Height</p>
@@ -20,7 +20,7 @@
     <div class="flex-1 mb-2 abilities_list">
         <p class="text-white mb-2">Abilities</p>
         <div class="mb-2 flex" *ngFor="let ability of pokemonInfo.abilities">
-            {{ability.ability.name}} <span></span>
+            {{ability.ability.name | titlecase}} <span></span>
         </div>
     </div>
 </div>

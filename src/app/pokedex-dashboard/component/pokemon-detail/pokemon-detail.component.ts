@@ -34,4 +34,8 @@ export class PokemonDetailComponent implements OnInit {
     this.router.navigate(['/pokedex', {id: pokeId }])
   }
 
+  getAbilitie(ability: any){
+    return ability.type ? ability.type.name: null
+  }
+
 }

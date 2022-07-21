@@ -1,0 +1,74 @@
+$base-font-size: 20px;
+$poke-ball-color: #616161;
+
+@function em($px, $base: $base-font-size) {
+  @return ($px / $base) * 1em;
+}
+
+.jump-container {
+  @media screen and (min-width: em(1000px)) {
+    animation: rotateball 2s 1s infinite alternate;
+  }
+}
+
+.pokeball {
+  & {
+    border-radius: 50%;
+    border: 2px solid $poke-ball-color;
+    height: em(50px);
+    margin: 0 auto 1rem;
+    position: relative;
+    width: em(50px);
+
+    @media screen and (min-width: em(700px)) {
+      border: 4px solid $poke-ball-color;
+      width: em(70px);
+      height: em(70px);
+    }
+  }
+
+  &__inner-circle {
+    background-color: $poke-ball-color;
+    border-radius: 50%;
+    border: 2px solid $poke-ball-color;
+    height: em(15px);
+    left: em(15px);
+    position: absolute;
+    top: em(15px);
+    width: em(15px);
+
+    @media screen and (min-width: em(700px)) {
+      width: em(22px);
+      height: em(22px);
+      left: em(21px);
+      top: em(21px);
+    }
+  }
+
+  &__line {
+    border-top: 2px solid $poke-ball-color;
+    position: relative;
+    top: em(22px);
+    width: 100%;
+
+    @media screen and (min-width: em(700px)) {
+      top: em(32px);
+    }
+  }
+}
+
+
+
+
+@keyframes rotateball {
+  0%{
+    transform:rotate(0deg)
+    rotate(360deg);
+  }
+  100%{
+    transform:rotate(0deg)
+    rotate(-360deg);
+  }
+}
+
+

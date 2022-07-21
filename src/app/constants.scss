@@ -1,0 +1,126 @@
+
+$type-color-fighting: #d56723;
+$type-color-flying: #3dc7ef;
+$type-color-posion: #b97fc9;
+$type-color-ground: #f7de3f;
+$type-color-rock: #a38c21;
+$type-color-bug: #729f3f;
+$type-color-ghost: #7b62a3;
+$type-color-steel: #9eb7b8;
+$type-color-fire: #fd7d24;
+$type-color-water: #4592c4;
+$type-color-grass: #9bcc50;
+$type-color-electric: #eed535;
+$type-color-psychic: #f366b9;
+$type-color-ice: #51c4e7;
+$type-color-dragon: #53a4cf;
+$type-color-fairy: #fdb9e9;
+
+.pill {
+    &.background-color{
+        &__fighting {
+            background: linear-gradient(180deg, $type-color-fighting 50%, $type-color-fighting 50%);
+            background-color: $type-color-fighting;
+            color: #fff;
+        };
+        &__flying {
+            background: linear-gradient(180deg, $type-color-flying 50%, #bdb9b8 50%);
+            background-color: $type-color-flying;
+            color: #212121;
+        };
+        &__normal {
+
+        };
+
+        &__poison {
+          background: linear-gradient(180deg,$type-color-posion 50%, $type-color-posion 50%);
+          background-color: $type-color-posion;
+          color: #fff;
+        }
+        &__ground {
+            background: linear-gradient(180deg,$type-color-ground 50%, $type-color-ground 50%);
+            background-color: $type-color-ground;
+            color: #212121;
+        }
+        &__rock {
+            background: linear-gradient(180deg,$type-color-rock 50%, $type-color-rock 50%);
+            background-color: $type-color-rock;
+            color: #fff;
+        };
+        &__bug {
+            background: linear-gradient(180deg, $type-color-bug 50%, $type-color-bug 50%);
+            background-color: $type-color-bug;
+            color: #fff;
+        }
+        &__ghost {
+            background: linear-gradient(180deg, $type-color-ghost 50%, $type-color-ghost 50%);
+            background-color: $type-color-ghost;
+            color: #fff;
+         }
+        &__steel {
+            background: linear-gradient(180deg, $type-color-steel 50%, $type-color-steel 50%);
+            background-color: $type-color-steel;
+            color: #212121;
+         }
+        &__fire {
+             background: linear-gradient(180deg, $type-color-fire 50%, $type-color-fire 50%);
+             background-color: $type-color-fire;
+             color: #fff;
+         }
+        &__water {
+            background: linear-gradient(180deg, $type-color-water 50%,$type-color-water 50%);
+            background-color: $type-color-water;
+            color: #fff;
+
+         };
+         &__grass {
+            background: linear-gradient(180deg,$type-color-grass 50%, $type-color-grass 50%);
+            background-color: $type-color-grass;
+            color: #212121;
+         }
+         &__electric {
+            background: linear-gradient(180deg,$type-color-electric 50%, $type-color-electric 50%);
+            background-color: $type-color-electric;
+            color: #212121;
+
+         };
+         &__psychic {
+            background: linear-gradient(180deg, $type-color-psychic 50%, $type-color-psychic 50%);
+            background-color: $type-color-psychic;
+            color: #fff;
+         };
+         &__ice {
+            background: linear-gradient(180deg, $type-color-ice 50%, $type-color-ice 50%);
+            background-color: $type-color-ice;
+            color: #212121;
+         };
+         &__dragon {
+            background: linear-gradient(180deg, $type-color-dragon 50%, #f16e57 50%);
+            background-color: $type-color-dragon;
+            color: #fff;
+
+         }
+         &__dark {
+
+          }
+        &__fairy{
+            background: linear-gradient(180deg, $type-color-fairy 50%, $type-color-fairy 50%);
+            background-color: $type-color-fairy;
+            color: #212121;
+          };
+        &__unknown {
+
+
+          }
+        &__shadow {
+
+          }
+
+    }
+
+}
+
+
+
+
+

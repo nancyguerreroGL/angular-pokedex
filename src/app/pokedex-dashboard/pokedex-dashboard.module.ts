@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PokedexlistComponent } from './container/pokedex-list/pokedex-list.component';
 import { PokemonCardComponent } from './component/pokemon-card/pokemon-card.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PokeLoaderComponent } from '../pokedex-dashboard/component/poke-loader/poke-loader.component';
 
 //services 
 import {PokedexDashboardService} from './pokedex-dahsboard.service';
@@ -11,6 +12,8 @@ import { PokemonDetailComponent } from './component/pokemon-detail/pokemon-detai
 import { PokemonAbilityInfoComponent } from './component/pokemon-ability-info/pokemon-ability-info.component';
 import { WeightPipe } from './component/pokemon-ability-info/pipes/weight-pipe.pipe';
 import { HeightPipe } from './component/pokemon-ability-info/pipes/height.pipe';
+
+import {Store} from './store';
 
 const ROUTES: Routes = [
   {
@@ -30,7 +33,8 @@ const ROUTES: Routes = [
     PokemonDetailComponent,
     PokemonAbilityInfoComponent,
     WeightPipe,
-    HeightPipe
+    HeightPipe,
+    PokeLoaderComponent
   ],
   imports: [
     CommonModule,

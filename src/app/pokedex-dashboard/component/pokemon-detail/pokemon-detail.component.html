@@ -3,8 +3,14 @@
 
     <div class="pokedex-pokemon-profile flex">
         <div class="pokedex-pokemon-image flex-1 m-2.5"><img src="{{pokemon.imageUrl}}"></div>
-        <div class="flex-1 bg-sky-600 rounded-md self-baseline m-2.5">
+        <div class="flex-1 m-2.5 flex-col">
             <pokemon-ability-info [pokemonInfo]="pokemon"></pokemon-ability-info>
+            <h3 class="my-2">Type</h3>
+            <div class="pokemon-type flex text-center">
+                <ng-container *ngFor="let abilitie of pokemon?.types">
+                    <span [className]="'w-2/6 py-2 mr-2 rounded-lg pill background-color__' + getAbilitie(abilitie)">{{ getAbilitie(abilitie) | titlecase}}</span>
+                </ng-container>
+            </div>
         </div>
     </div>
 </div>

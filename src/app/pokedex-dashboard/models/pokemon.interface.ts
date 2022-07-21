@@ -1,4 +1,6 @@
 export interface Pokemon {
+  next: string,
+  previous: string
   results: PokemonDetail[],
 }
 
@@ -29,7 +31,7 @@ export interface PokemonDetail {
   species: object,
   sprites: any,
   stats: [],
-  types: [],
+  types: Array<any>,
   weight: number
 }
 
