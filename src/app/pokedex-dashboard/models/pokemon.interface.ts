@@ -1,7 +1,7 @@
 export interface Pokemon {
   next: string,
-  previous: string
-  results: PokemonDetail[],
+  previous?: string
+  results?: Array<PokemonDetail>,
 }
 
 export interface abilitie {

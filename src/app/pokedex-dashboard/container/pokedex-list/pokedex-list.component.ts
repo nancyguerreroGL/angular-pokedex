@@ -3,59 +3,50 @@ import  {PokedexDashboardService} from '../../pokedex-dahsboard.service';
 import { PokemonDetail } from '../../models/pokemon.interface';
 import { map, filter, debounceTime, mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { fromEvent} from 'rxjs';
-const POKEDEX_API = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=12';
+import { fromEvent, Observable} from 'rxjs';
+import { Store } from '../../store';
 @Component({
   selector: 'pokedex-list',
   templateUrl: './pokedex-list.component.html'
 })
 export class PokedexlistComponent implements OnInit, AfterViewInit {
-  pokemonDetail: PokemonDetail[] = [];
+ // pokemonDetail: PokemonDetail[] = [];
   pageByScroll$ = fromEvent(window, 'scroll');
   pokedexPaginationUrl?: string;
   numberOfItems = 12;// number of items in a page
   itemHeight = 1000;
   showLoadMore: boolean = true;
   showLoader: boolean = false;
+  pokedexResults$?: Observable<any>;
+  nextUrl: object = {
+    next: 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=12'
+  }
 
-  constructor(private pokedexService: PokedexDashboardService,
-    private router: Router) { }
+  constructor(
+    private pokedexService: PokedexDashboardService,
+    private router: Router,
+    private store: Store
+    ) { }
 
   ngOnInit(): void {
-    this.pokedexService.getPokemon(POKEDEX_API)
-    .subscribe(response=> {
-      this.pokemonDetail = response.results;
-      this.pokedexPaginationUrl = response.next
-    })
+    this.pokedexResults$ = this.store.select('next', 'previous', 'results');
+    this.pokedexService.getPokemon().subscribe();
   }
 
   ngAfterViewInit(){
-    this.pageByScroll$.pipe(
+   this.pageByScroll$.pipe(
       map(()=> window.scrollY),
       filter((current)=> current >= document.body.clientHeight - window.innerHeight),
       debounceTime(200),
-      mergeMap(()=> {
-        this.showLoader = true;
-        return this.pokedexService.getPokemon(this.pokedexPaginationUrl)
-      })
-    ).subscribe((response)=> {
-        const results = response.results
-        this.pokemonDetail = [...this.pokemonDetail, ...results];
-        this.pokedexPaginationUrl = response.next;
-        this.showLoadMore = false;
-    })
+      mergeMap(()=> 'test')
+    )
   }
 
-  loadMorePokemon() {
-    this.showLoadMore = false;
-    this.showLoader = true;
-    this.pokedexService.getPokemon(this.pokedexPaginationUrl)
-    .subscribe(response=> {
-      const results = response.results
-      this.pokemonDetail = [...this.pokemonDetail, ...results];
-      this.pokedexPaginationUrl = response.next;
-      this.showLoader = false;
-    })
+  loadMorePokemon(pokemonDetail: PokemonDetail) {
+
+   // this.showLoader = true;
+    this.pokedexResults$ = this.store.select('next', 'previous', 'results');
+    this.pokedexService.getPokemon().subscribe();
   }
 
   handleView(event: PokemonDetail) {

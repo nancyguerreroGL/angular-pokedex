@@ -1,6 +1,6 @@
-
+<div class="flex-1" *ngIf="(pokedexResults$ | async) as pokemonDetail">
     <ul class="flex flex-wrap justify-center mx-auto">
-        <li class="pokemon-figure mx-3 mb-12" *ngFor="let pokemon of pokemonDetail">
+        <li class="pokemon-figure mx-3 mb-12" *ngFor="let pokemon of pokemonDetail.results">
             <a>
               <pokemon-card
               (view)="handleView(pokemon)"
@@ -8,9 +8,10 @@
            </a>
         </li>
     </ul>
-    <button *ngIf="showLoadMore" (click)="loadMorePokemon()" class="block mx-auto px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-md shadow-sm">
+    <button *ngIf="showLoadMore" (click)="loadMorePokemon(pokemonDetail)" class="block mx-auto px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-md shadow-sm">
         Load More Pokemon
     </button>
+   </div>
     <poke-loader *ngIf="showLoader"></poke-loader>
 
 <router-outlet></router-outlet>

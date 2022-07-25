@@ -2,14 +2,15 @@ import { Injectable, ElementRef } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Pokemon, abilitie, PokemonDetail, Pokemon_Sepecies } from './models/pokemon.interface';
 import { forkJoin, Observable, throwError } from 'rxjs';
-import { HttpErrorHandler, HandleError } from '../../http-error-handler.service';
-import { catchError, map, mergeMap, retry, switchMap, tap } from 'rxjs/operators';
+import { map, mergeMap, retry, switchMap, tap } from 'rxjs/operators';
+import { Store } from './store';
 
 const POKEDEX_API = 'https://pokeapi.co/api/v2/pokemon/';
 const POKEDEX_IMAGE_BASE_URL = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/";
 const POKEDEX_IMAGE_BASE_FULL = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/";
 const POKEMON_SPECIES = "https://pokeapi.co/api/v2/pokemon-species/";
 const POKEDEX_IMAGE_FORMAT = '.png';
+
 
 const baseImgUrl = (isFullImg: boolean) => isFullImg ? `${POKEDEX_IMAGE_BASE_FULL}`: `${POKEDEX_IMAGE_BASE_URL}`;
 
@@ -26,15 +27,20 @@ const getPokedex_image_base_number = (value: number, isFullImg: boolean) => {
     return `${baseImgUrl(isFullImg)}${convertId}`;
 };
 
+
+
 @Injectable()
 export class PokedexDashboardService {
-    constructor(private http: HttpClient){}
-    getPokemon(url: any): Observable<any> {
+    constructor(private http: HttpClient, private store: Store){}
+
+
+    getPokemon(): Observable<any> {
+        const url = this.store.value.next
         // get the items
-       return this.http.get<Pokemon>(url).pipe(
-            switchMap((items) => {
+       return this.http.get(url).pipe(
+            switchMap((items: any) => {
             const results = items.results
-            const itemRequests = results.map((item) => this.http.get(`${POKEDEX_API}${item.name}`).pipe(
+            const itemRequests = results.map((item: { name: any; }) => this.http.get(`${POKEDEX_API}${item.name}`).pipe(
                 map((item: any) => {
                     return {
                         ...item,
@@ -49,8 +55,11 @@ export class PokedexDashboardService {
                         results: itemRequests,
                         previous: items.previous
                     }
-                })
-            );
+                }),
+            )
+            }), tap((updatedList)=>{
+                console.log('updatedList', updatedList)
+                this.store.set(updatedList, 'next', 'previous', 'results')
             })
         );
     };
@@ -72,7 +81,6 @@ export class PokedexDashboardService {
          map((item: any)=> item)
      )
     }
-    
 
 }
 

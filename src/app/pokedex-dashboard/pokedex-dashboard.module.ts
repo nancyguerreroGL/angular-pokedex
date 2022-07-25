@@ -46,7 +46,8 @@ const ROUTES: Routes = [
     PokemonCardComponent
   ],
   providers: [
-    PokedexDashboardService
+    PokedexDashboardService,
+    Store
   ]
 })
 export class PokedexDashboardModule { }
