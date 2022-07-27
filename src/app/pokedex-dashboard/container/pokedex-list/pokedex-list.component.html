@@ -1,4 +1,4 @@
-<div class="flex-1" *ngIf="(pokedexResults$ | async) as pokemonDetail">
+<div class="flex-1" *ngIf="(pokedexResults$ | async) as pokemonDetail; else loading">
     <ul class="flex flex-wrap justify-center mx-auto">
         <li class="pokemon-figure mx-3 mb-12" *ngFor="let pokemon of pokemonDetail.results">
             <a>
@@ -8,10 +8,14 @@
            </a>
         </li>
     </ul>
-    <button *ngIf="showLoadMore" (click)="loadMorePokemon(pokemonDetail)" class="block mx-auto px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-md shadow-sm">
+    <button *ngIf="showLoadMore" (click)="loadMorePokemon()" class="block mx-auto px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-md shadow-sm">
         Load More Pokemon
     </button>
+
    </div>
-    <poke-loader *ngIf="showLoader"></poke-loader>
+   <ng-template #loading>
+    <poke-loader></poke-loader>
+</ng-template>
+
 
 <router-outlet></router-outlet>

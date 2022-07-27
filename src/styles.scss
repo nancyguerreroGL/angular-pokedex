@@ -2,7 +2,10 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200;300&display=swap');
+
 
 body {
     background: url("https://assets.pokemon.com/static2/_ui/img/chrome/body_bg.png") #424242;
+    font-family: 'Exo 2', sans-serif;
 }

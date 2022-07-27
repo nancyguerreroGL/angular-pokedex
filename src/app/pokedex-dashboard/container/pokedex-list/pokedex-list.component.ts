@@ -18,9 +18,6 @@ export class PokedexlistComponent implements OnInit, AfterViewInit {
   showLoadMore: boolean = true;
   showLoader: boolean = false;
   pokedexResults$?: Observable<any>;
-  nextUrl: object = {
-    next: 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=12'
-  }
 
   constructor(
     private pokedexService: PokedexDashboardService,
@@ -38,13 +35,13 @@ export class PokedexlistComponent implements OnInit, AfterViewInit {
       map(()=> window.scrollY),
       filter((current)=> current >= document.body.clientHeight - window.innerHeight),
       debounceTime(200),
-      mergeMap(()=> 'test')
-    )
+    ).subscribe((data)=> {
+      this.loadMorePokemon()
+    })
   }
 
-  loadMorePokemon(pokemonDetail: PokemonDetail) {
-
-   // this.showLoader = true;
+  loadMorePokemon() {
+    this.showLoadMore = false;
     this.pokedexResults$ = this.store.select('next', 'previous', 'results');
     this.pokedexService.getPokemon().subscribe();
   }

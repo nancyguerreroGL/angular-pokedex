@@ -32,8 +32,7 @@ const getPokedex_image_base_number = (value: number, isFullImg: boolean) => {
 @Injectable()
 export class PokedexDashboardService {
     constructor(private http: HttpClient, private store: Store){}
-
-
+    
     getPokemon(): Observable<any> {
         const url = this.store.value.next
         // get the items
@@ -57,9 +56,9 @@ export class PokedexDashboardService {
                     }
                 }),
             )
-            }), tap((updatedList)=>{
-                console.log('updatedList', updatedList)
-                this.store.set(updatedList, 'next', 'previous', 'results')
+            }), tap((updatedInfo)=>{
+                console.log('updatedList', updatedInfo)
+                this.store.set(updatedInfo, 'next', 'previous', 'results')
             })
         );
     };

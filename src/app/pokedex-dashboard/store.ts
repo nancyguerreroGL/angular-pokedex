@@ -21,7 +21,10 @@ export class Store {
 
     select<Pokemon>(...args: Array<string>): Observable<Pokemon> {
         return this.store.pipe(
-            map((value)=> value)
+            map((value)=> {
+                console.log('value', value)
+                return value
+            })
         )
     }
 

@@ -20,7 +20,7 @@ const ROUTES: Routes = [
     path: 'pokedex',
     children: [
       {path: '', component: PokedexlistComponent, pathMatch:'full'},
-      {path:':name/:id', component: PokemonDetailComponent, data: { animation: 'hero' }}
+      {path:':name/:id', component: PokemonDetailComponent}
     ]
   }
 ]
