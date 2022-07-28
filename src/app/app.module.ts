@@ -7,6 +7,8 @@ import { PokedexDashboardModule } from './pokedex-dashboard/pokedex-dashboard.mo
 import { PokedexContainerComponent } from './pokedex-container/pokedex-container.component';
 import { AuthModule } from './auth/auth.module';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
+import { CommonModule } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,6 +16,7 @@ import { InfiniteScrollDirective } from './directives/infinite-scroll.directive'
     InfiniteScrollDirective
   ],
   imports: [
+    CommonModule,
     //angular modules
     BrowserModule,
     AppRoutingModule,

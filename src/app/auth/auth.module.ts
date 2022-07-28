@@ -1,33 +1,29 @@
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { SharedComponent } from './shared/shared.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponentComponent } from './auth-component/auth-component.component';
+import { LoginComponent } from '../auth/login/login.component';
+import { RegisterComponent} from '../auth/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 const ROUTES: Routes = [
   {
-    path: '',
-    component: AuthComponentComponent
+    path: 'auth',
+    children: [
+      {path: '', pathMatch: 'full', redirectTo: 'login'},
+      {path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule)},
+     // {path: 'register', component: RegisterComponent},
+      {path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule)},
+    ]
+
   }
 ]
 
-
-
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegisterComponent,
-    SharedComponent,
-    AuthComponentComponent
-  ],
   imports: [
-    CommonModule,
-    RouterModule.forChild(ROUTES)
-  ], 
-  exports: [
-    LoginComponent
+    BrowserModule,
+    RouterModule.forChild(ROUTES),
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }
