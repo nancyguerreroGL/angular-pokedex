@@ -7,4 +7,7 @@
     <a class="shadow bg-blue-400 
     hover:bg-blue-700 focus:shadow-outline focus:outline-none 
     text-white py-2 px-4 rounded justify-end" routerLink="/auth/register">Create Account!</a>
+    <div *ngIf="error" class="error">
+        {{error}}
+    </div>
 </auth-form>

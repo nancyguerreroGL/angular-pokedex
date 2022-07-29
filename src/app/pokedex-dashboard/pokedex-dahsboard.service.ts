@@ -34,7 +34,7 @@ export class PokedexDashboardService {
     constructor(private http: HttpClient, private store: Store){}
     
     getPokemon(): Observable<any> {
-        const url = this.store.value.next
+        const url = this.store.value.pokemonResults.next;
         // get the items
        return this.http.get(url).pipe(
             switchMap((items: any) => {
@@ -48,7 +48,7 @@ export class PokedexDashboardService {
                 })
             ));
             return forkJoin(itemRequests).pipe(
-                map((itemRequests) => {
+                map((itemRequests: any) => {
                     return {
                         next: items.next,
                         results: itemRequests,
@@ -57,8 +57,12 @@ export class PokedexDashboardService {
                 }),
             )
             }), tap((updatedInfo)=>{
-                console.log('updatedList', updatedInfo)
-                this.store.set(updatedInfo, 'next', 'previous', 'results')
+                const nextState = {
+                    next: updatedInfo.next,
+                    results: [...this.store.value.pokemonResults.results, ...updatedInfo.results],
+                    previous: updatedInfo.previous
+                }
+                this.store.set('pokemonResults', nextState)
             })
         );
     };

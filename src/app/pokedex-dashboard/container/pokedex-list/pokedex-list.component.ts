@@ -26,7 +26,7 @@ export class PokedexlistComponent implements OnInit, AfterViewInit {
     ) { }
 
   ngOnInit(): void {
-    this.pokedexResults$ = this.store.select('next', 'previous', 'results');
+    this.pokedexResults$ = this.store.select('pokemonResults');
     this.pokedexService.getPokemon().subscribe();
   }
 
@@ -42,7 +42,7 @@ export class PokedexlistComponent implements OnInit, AfterViewInit {
 
   loadMorePokemon() {
     this.showLoadMore = false;
-    this.pokedexResults$ = this.store.select('next', 'previous', 'results');
+    this.pokedexResults$ = this.store.select('pokemonResults');
     this.pokedexService.getPokemon().subscribe();
   }
 

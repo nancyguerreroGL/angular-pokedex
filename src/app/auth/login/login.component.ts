@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { FormGroup } from '@angular/forms';
+import { AuthService } from '../shared/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pokedex-login',
@@ -9,10 +10,11 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 })
 export class LoginComponent implements OnInit {
 
- form!: FormGroup
+ error!: string
 
   constructor(
-
+    private authService: AuthService,
+    private router: Router
   ) { }
 
  
@@ -20,8 +22,14 @@ export class LoginComponent implements OnInit {
 
   }
 
-  loginUser(event: FormGroup) {
-    console.log('event', event.value)
+  async loginUser(event: FormGroup) {
+    const {email, password} = event.value;
+    try {
+      await this.authService.loginUser(email, password);
+      this.router.navigate(['/pokedex'])
+    } catch(err: any) {
+      this.error = err.message
+    }
   }
 
 

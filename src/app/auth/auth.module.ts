@@ -6,6 +6,15 @@ import { RegisterComponent} from '../auth/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+
+import { SharedModule } from './shared/shared.module';
+
 const ROUTES: Routes = [
   {
     path: 'auth',
@@ -19,11 +28,28 @@ const ROUTES: Routes = [
   }
 ]
 
+export const firebaseConfig = {
+  apiKey: "AIzaSyApHiRBNx91xUcmS65By9KKQq-qBjSjV3w",
+  authDomain: "angular-pokedex-dff1f.firebaseapp.com",
+  databaseURL: "https://angular-pokedex-dff1f-default-rtdb.firebaseio.com",
+  projectId: "angular-pokedex-dff1f",
+  storageBucket: "angular-pokedex-dff1f.appspot.com",
+  messagingSenderId: "174603308728",
+  appId: "1:174603308728:web:0a92903de30bc2b2e7ee4d",
+  measurementId: "G-GBNQ0GVCC1"
+};
+
 @NgModule({
   imports: [
     BrowserModule,
     RouterModule.forChild(ROUTES),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    SharedModule.forRoot(),
+
   ]
 })
-export class AuthModule { }
+export class AuthPokedexModule { }
