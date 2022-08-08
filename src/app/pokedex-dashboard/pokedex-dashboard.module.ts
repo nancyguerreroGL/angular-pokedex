@@ -13,7 +13,7 @@ import { PokemonAbilityInfoComponent } from './component/pokemon-ability-info/po
 import { WeightPipe } from './component/pokemon-ability-info/pipes/weight-pipe.pipe';
 import { HeightPipe } from './component/pokemon-ability-info/pipes/height.pipe';
 
-import {Store} from './store';
+import {Store} from '../store';
 
 const ROUTES: Routes = [
   {

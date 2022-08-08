@@ -3,7 +3,7 @@ import { HttpClient} from '@angular/common/http';
 import { Pokemon, abilitie, PokemonDetail, Pokemon_Sepecies } from './models/pokemon.interface';
 import { forkJoin, Observable, throwError } from 'rxjs';
 import { map, mergeMap, retry, switchMap, tap } from 'rxjs/operators';
-import { Store } from './store';
+import { Store } from '../store';
 
 const POKEDEX_API = 'https://pokeapi.co/api/v2/pokemon/';
 const POKEDEX_IMAGE_BASE_URL = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/";

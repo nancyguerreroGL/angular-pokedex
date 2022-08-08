@@ -4,7 +4,7 @@ import { PokemonDetail } from '../../models/pokemon.interface';
 import { map, filter, debounceTime, mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { fromEvent, Observable} from 'rxjs';
-import { Store } from '../../store';
+import { Store } from '../../../store';
 @Component({
   selector: 'pokedex-list',
   templateUrl: './pokedex-list.component.html'

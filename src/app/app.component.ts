@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {Store} from './pokedex-dashboard/store';
+import {Store} from './store';
 import {AuthService, User} from './auth/shared/services/auth/auth.service';
 import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ){}
 
   ngOnInit() {
@@ -26,4 +28,10 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.subscription.unsubscribe();
   }
+
+  async onLogout() {
+     await this.authService.logoutUser();
+     this.router.navigate(['/auth/login'])
+  }
+
 }

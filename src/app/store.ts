@@ -1,22 +1,21 @@
 import { BehaviorSubject, Observable } from "rxjs";
-import { Pokemon, PokemonDetail } from './models/pokemon.interface';
+import { Pokemon, PokemonDetail } from './pokedex-dashboard/models/pokemon.interface';
 import {distinctUntilChanged, map, pluck} from 'rxjs/operators';
-import { User } from '../auth/shared/services/auth/auth.service';
+import { User } from './auth/shared/services/auth/auth.service';
 const INITIAL_URL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=12"
 
 export interface State {
-   // user: User,
+   //  user: User,
     [key: string]: any
 }
 
 const state: State = {
+  user: undefined,
   pokemonResults:  {
     next: INITIAL_URL,
     previous: undefined,
     results: [],
-  },
-  user: undefined
-
+  }
 }
 
 export class Store {

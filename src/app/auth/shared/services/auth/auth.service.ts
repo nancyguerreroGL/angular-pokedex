@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { createSecureServer } from 'http2';
-import { Store } from '../../../../pokedex-dashboard/store';
+import { Store } from '../../../../store';
 import { tap } from 'rxjs/operators';
 
 export interface User {
@@ -43,6 +43,10 @@ export class AuthService {
 
   loginUser(email: string, password: string) {
     return this.af.signInWithEmailAndPassword(email, password);
+  }
+
+  logoutUser() {
+    return this.af.signOut();
   }
   
 }

@@ -1,4 +1,4 @@
-
-
-<h1>{{user$ | async | json}}</h1>
+<app-header [user]=" user$ | async"
+(logout)="onLogout()"
+></app-header>
 <pokedex-container></pokedex-container>
