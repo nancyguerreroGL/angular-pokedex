@@ -25,7 +25,7 @@ export class PokemonDetailComponent implements OnInit {
       switchMap((params: ParamMap) => {
         const name = params.get('name')!
         const id = params.get('id')!
-        return this.service.getPokemonDetail(name, id)
+        return this.service.getPokemonDetail(name,true)
       }))
   }
 

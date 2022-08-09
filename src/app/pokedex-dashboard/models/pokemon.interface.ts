@@ -1,7 +1,8 @@
 export interface Pokemon {
+  count?: number,
   next: string,
   previous?: string
-  results?: Array<PokemonDetail>,
+  results: Array<PokemonDetail>,
 }
 
 export interface abilitie {
@@ -13,6 +14,11 @@ export interface abilitie {
   slot: number
 }
 
+export interface PokemonUrl {
+  name: string,
+  url: string
+}
+
 export interface PokemonDetail {
   abilities: Array<abilitie>,
   base_experience: number,
@@ -21,7 +27,7 @@ export interface PokemonDetail {
   height: number,
   held_items: [],
   id: number,
-  imageUrl: object,
+  imageUrl?: object,
   is_default: boolean,
   location_area_encounters: string,
   moves: [],

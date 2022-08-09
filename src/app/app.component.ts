@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  user$!: Observable<User>;
+  user$!: Observable<any>;
   subscription!: Subscription
   title = 'my-app';
 
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.authService.auth$.subscribe();
-    this.user$ = this.store.select<User>('user')
+    this.user$ = this.store.select('user')
   }
   ngOnDestroy(){
     this.subscription.unsubscribe();

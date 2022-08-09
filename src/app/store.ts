@@ -2,16 +2,17 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { Pokemon, PokemonDetail } from './pokedex-dashboard/models/pokemon.interface';
 import {distinctUntilChanged, map, pluck} from 'rxjs/operators';
 import { User } from './auth/shared/services/auth/auth.service';
-const INITIAL_URL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=12"
+const INITIAL_URL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=8"
 
 export interface State {
-   //  user: User,
-    [key: string]: any
+    user: User | undefined,
+   pokemonResults: Pokemon
 }
 
 const state: State = {
   user: undefined,
   pokemonResults:  {
+    count: undefined,
     next: INITIAL_URL,
     previous: undefined,
     results: [],
@@ -19,7 +20,7 @@ const state: State = {
 }
 
 export class Store {
-    private subject = new BehaviorSubject<any>(state);
+    private subject = new BehaviorSubject<State>(state);
     private store = this.subject.asObservable().pipe(
         distinctUntilChanged()
     );
@@ -28,11 +29,9 @@ export class Store {
      return this.subject.value;
     }
 
-    select<T>(...args: Array<string>): Observable<T> {
+    select(name: string) {
         return this.store.pipe(
-            map((value)=> {
-                return value
-            })
+            pluck(name)
         )
     }
 
