@@ -1,0 +1,14 @@
+
+
+.app-header {
+    background: #fff;
+    border-bottom: 1px solid #c1cedb;
+    padding: 15px 0;
+    text-align: center;
+    img {
+      display: inline-block;
+    }
+    &__user-info {
+      cursor: pointer;
+    }
+  }

@@ -1,13 +1,13 @@
-<div class="poke-register">
-
-    <p class="min-h-[146px]">
-        Create a Pokémon Trainer Club account today! With a Pokémon Trainer Club account, you can manage your
-        Pokemon.com profile, play the Pokémon Trading Card Game Online,
-    </p>
-    <div class="md:flex md:items-center justify-end">
-        <button
-            class="shadow bg-blue-400 hover:bg-blue-700 focus:shadow-outline focus:outline-none text-white py-2 px-4 rounded justify-end"
-            type="button">
-            Create Account!</button>
+<auth-form (submitted)="registerUser($event)">
+    <h1 class="text-[125%] text-[#919191]">Register</h1>
+    <button class="shadow bg-green-600 hover:bg-green-700 focus:shadow-outline 
+    focus:outline-none text-white py-2 px-4 rounded" type="submit">
+       Register
+    </button>
+    <a class="shadow bg-blue-400 
+    hover:bg-blue-700 focus:shadow-outline focus:outline-none 
+    text-white py-2 px-4 rounded justify-end" routerLink="/auth/login">Already have an account?</a>
+    <div *ngIf="error" class="error">
+        {{error}}
     </div>
-</div>
+</auth-form>

@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "angular-pokedex-dff1f"
+  },
+  "targets": {
+    "angular-pokedex-dff1f": {
+      "hosting": {
+        "my-app": [
+          "angular-pokedex-dff1f"
+        ]
+      }
+    }
   }
 }

@@ -1,0 +1,72 @@
+<div class="flex flex-row relative">
+    <div class="flex-1 pt-4 pb-2">
+        <ng-content select="h1"></ng-content>
+        <div class="pokedex-auth flex flex-col flex-1 m-2 bg-gray-100 min-h-[365px] p-5">
+            <form class="w-5/6" [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="md:flex md:items-center mb-6">
+                    <div class="md:w-1/3">
+                        <label 
+                        for="email"
+                        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                            for="inline-full-name">
+                            Email
+                        </label>
+                    </div>
+                    <div class="md:w-2/3">
+                        <input
+                            class="bg-gray-600 border-gray-200 rounded w-full py-2 px-4 focus:bg-white focus:border-purple-500"
+                            id="inline-full-name" 
+                            type="text"
+                            formControlName="email">
+                            <p *ngIf="f['email'].errors?.['email'] && f['email'].touched" class="mt-2 text-pink-600 text-sm">
+                                Please provide a valid email address.
+                            </p>
+                    </div>
+                </div>
+                <div class="md:flex md:items-center mb-6">
+                    <div class="md:w-1/3">
+                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                            for="password">
+                            Password
+                        </label>
+                    </div>
+                    <div class="md:w-2/3">
+                        <input class="bg-gray-600 border-gray-200 rounded w-full py-2 px-4 focus:bg-white focus:border-purple-500"
+                                id="inline-password"  
+                                type="password"
+                                formControlName="password">
+                        <p *ngIf="f['password'].errors?.['required'] && f['password'].touched" class="mt-2 text-pink-600 text-sm">
+                                Password is required
+                        </p>
+                    </div>
+                </div>
+                <div class="md:flex md:items-center justify-end m-2.5 relative z-10">
+                    <ng-content select="button"></ng-content>
+                </div>
+            </form>
+            <span class="self-center notch-bottom"></span>
+            <ng-content select=".error"></ng-content>
+        </div>
+    </div>
+    <div class="flex-1 pt-4 pb-2">
+        <h1 class="text-[125%] text-[#919191]">Join the Pokémon Trainer Club!</h1>
+        <div class="pokedex-auth flex flex-col flex-1 m-2 bg-gray-100 min-h-[290px] p-5">
+            <div class="poke-register">
+
+                <p class="min-h-[146px]">
+                    Create a Pokémon Trainer Club account today! With a Pokémon Trainer Club account, you can manage
+                    your
+                    Pokemon.com profile, play the Pokémon Trading Card Game Online,
+                </p>
+                <div class="md:flex md:items-center justify-end">
+                    <ng-content select="a"></ng-content>
+                </div>
+            </div>
+            <span class="self-center notch-bottom"></span>
+        </div>
+        <div class="about-us-characters absolute">
+            <img src="https://assets.pokemon.com/static2/_ui/img/account/pokemon-login.png" alt="Characters" width="443"
+                height="248">
+        </div>
+    </div>
+</div>
