@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { AuthService } from '../shared/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pokedex-register',
@@ -11,7 +12,8 @@ import { AuthService } from '../shared/services/auth/auth.service';
 export class RegisterComponent implements OnInit {
   error!: string;
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -20,7 +22,8 @@ export class RegisterComponent implements OnInit {
   async registerUser(event: FormGroup) {
     const {email, password} = event.value;
     try {
-      await this.authService.createUser(email, password)
+      await this.authService.createUser(email, password);
+      this.router.navigate(['/pokedex'])
     } catch(err: any) {
       this.error = err.message
     }
