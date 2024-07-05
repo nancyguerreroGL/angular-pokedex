@@ -8,7 +8,12 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './login.component';
 
 export const ROUTES: Routes = [
-    {path: '', component: LoginComponent}
+   {
+    path: 'auth/login',
+    children: [ 
+      {path: '', component: LoginComponent}
+    ]
+   }
 ]
 
 
@@ -23,6 +28,9 @@ export const ROUTES: Routes = [
   declarations: [
     LoginComponent
 
+  ],
+  exports: [
+    LoginComponent
   ]
 })
 export class LoginModule { }

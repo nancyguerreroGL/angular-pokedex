@@ -4,10 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PokedexDashboardModule } from './pokedex-dashboard/pokedex-dashboard.module';
-import { PokedexContainerComponent } from './pokedex-container/pokedex-container.component';
 import { AuthPokedexModule } from './auth/auth.module';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
+import { Store } from './store';
+import {LoginModule} from './auth/login/login.module';
 
 
 
@@ -16,7 +17,6 @@ import { HeaderComponent } from './header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
-    PokedexContainerComponent,
     HeaderComponent
   ],
   imports: [
@@ -25,11 +25,14 @@ import { HeaderComponent } from './header/header.component';
     BrowserModule,
     AppRoutingModule,
     //custom modules
+    AuthPokedexModule,
     PokedexDashboardModule,
-    AuthPokedexModule
+    LoginModule
 
+  ], 
+  providers: [
+    Store
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

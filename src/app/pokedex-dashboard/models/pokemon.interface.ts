@@ -3,6 +3,7 @@ export interface Pokemon {
   next: string,
   previous?: string
   results: Array<PokemonDetail>,
+  loading: boolean
 }
 
 export interface abilitie {

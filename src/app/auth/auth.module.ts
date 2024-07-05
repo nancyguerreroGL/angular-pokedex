@@ -10,6 +10,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../../environments/environment';
 
 import { SharedModule } from './shared/shared.module';
+import {LoginComponent} from './login/login.component';
 
 const ROUTES: Routes = [
   {

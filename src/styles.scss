@@ -5,6 +5,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200;300&display=swap');
 
 
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 body {
     background: url("https://assets.pokemon.com/static2/_ui/img/chrome/body_bg.png") #424242;
     font-family: 'Exo 2', sans-serif;

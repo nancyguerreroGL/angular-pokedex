@@ -1,20 +1,21 @@
-<div class="flex-1" *ngIf="(pokedexResults$ | async) as pokemonDetail; else loading">
-    <ul class="flex flex-wrap justify-center mx-auto">
-        <li class="pokemon-figure mx-3 mb-12" *ngFor="let pokemon of pokemonDetail.results">
-            <a>
-              <pokemon-card
-              (view)="handleView(pokemon)"
-              [detail]="pokemon"></pokemon-card>
-           </a>
-        </li>
-    </ul>
-    <button *ngIf="showLoadMore" (click)="loadMorePokemon()" class="block mx-auto px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-md shadow-sm">
-        Load More Pokemon
-    </button>
+<div class="flex">
+    <div class="flex-1">
+        <ul class="flex flex-wrap justify-center mx-auto" *ngIf="pokedexResults">
+            <li class="pokemon-figure mx-3 mb-12" *ngFor="let pokemon of pokedexResults.results">
+                <a>
+                  <pokemon-card
+                  (view)="handleView(pokemon)"
+                  [detail]="pokemon"></pokemon-card>
+               </a>
+            </li>
+        </ul>
+       <!-- <div class="flex justify-center">
+            <div class="blur-[2px] bg-slate-200 shadow-slate-50 w-[215px] h-[215px] mx-3 rounded-[5px]"></div>
+            <div class="blur-[2px] bg-slate-200 shadow-slate-50 w-[215px] h-[215px] mx-3 rounded-[5px]"></div>
+            <div class="blur-[2px] bg-slate-200 shadow-slate-50 w-[215px] h-[215px] mx-3 rounded-[5px]"></div>
+            <div class="blur-[2px] bg-slate-200 shadow-slate-50 w-[215px] h-[215px] mx-3 rounded-[5px]"></div>
+        </div> -->
+    </div>
 </div>
-   <ng-template #loading>
-    <poke-loader></poke-loader>
-</ng-template>
-
 
 <router-outlet></router-outlet>

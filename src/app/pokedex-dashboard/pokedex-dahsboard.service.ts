@@ -35,6 +35,7 @@ export class PokedexDashboardService {
                 private store: Store){}
     
     getPokemonList(): Observable<Pokemon> {
+        console.log('this.store', this.store)
        const url = this.store.value.pokemonResults.next;
        return this.http.get<Pokemon>(url).pipe(
         switchMap((items: Pokemon) => {
@@ -47,12 +48,13 @@ export class PokedexDashboardService {
                         count: items.count,
                         next: items.next,
                         results: [...this.store.value.pokemonResults.results, ...pokemonResultsArray] ,
-                        previous: items.previous
+                        previous: items.previous,
+                        loading: false
                     };
                 }),
             )
             }), tap((nextState)=>{
-                this.store.set('pokemonResults', nextState)
+                this.store.set('pokemonResults', nextState);
             })
         );
     };
@@ -62,7 +64,8 @@ export class PokedexDashboardService {
             map((item: any) => {
                 return {
                     ...item,
-                    imageUrl: `${getPokedex_image_base_number(item.id, isFullImg)}${POKEDEX_IMAGE_FORMAT}`
+                    imageUrl: `${getPokedex_image_base_number(item.id, isFullImg)}${POKEDEX_IMAGE_FORMAT}`,
+
                 }
             })
         );

@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
     const {email, password} = event.value;
     try {
       await this.authService.loginUser(email, password);
+      console.log('succelu')
       this.router.navigate(['/pokedex'])
     } catch(err: any) {
       this.error = err.message

@@ -65,6 +65,22 @@
     width: 443px;
 }
 
+.container {
+    position: relative;
+    box-sizing: border-box;
+    clear: both;
+    &.pokedex {
+        min-height: 100%;
+        margin: 0 auto;
+        background: #fff url("https://assets.pokemon.com/static2/_ui/img/chrome/container_bg.png");
+        max-width: 1280px;
+        .pokemon-results {
+            background: #fff 
+        }
+
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .about-us-characters {
         width: 50%;

@@ -1,9 +1,9 @@
 .container {
-    display: block;
     position: relative;
     box-sizing: border-box;
     clear: both;
     &.pokedex {
+        min-height: 100%;
         margin: 0 auto;
         background: #fff url("https://assets.pokemon.com/static2/_ui/img/chrome/container_bg.png");
         max-width: 1280px;

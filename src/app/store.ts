@@ -2,7 +2,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { Pokemon, PokemonDetail } from './pokedex-dashboard/models/pokemon.interface';
 import {distinctUntilChanged, map, pluck} from 'rxjs/operators';
 import { User } from './auth/shared/services/auth/auth.service';
-const INITIAL_URL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=8"
+const INITIAL_URL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=12"
 
 export interface State {
     user: User | undefined,
@@ -16,6 +16,7 @@ const state: State = {
     next: INITIAL_URL,
     previous: undefined,
     results: [],
+    loading: true
   }
 }
 

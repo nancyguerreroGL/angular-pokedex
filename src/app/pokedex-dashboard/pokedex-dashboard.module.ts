@@ -5,6 +5,7 @@ import { PokedexlistComponent } from './container/pokedex-list/pokedex-list.comp
 import { PokemonCardComponent } from './component/pokemon-card/pokemon-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PokeLoaderComponent } from '../pokedex-dashboard/component/poke-loader/poke-loader.component';
+import { PokedexContainerComponent } from '../pokedex-dashboard/component/pokedex-container/pokedex-container.component';
 
 //services 
 import {PokedexDashboardService} from './pokedex-dahsboard.service';
@@ -13,13 +14,14 @@ import { PokemonAbilityInfoComponent } from './component/pokemon-ability-info/po
 import { WeightPipe } from './component/pokemon-ability-info/pipes/weight-pipe.pipe';
 import { HeightPipe } from './component/pokemon-ability-info/pipes/height.pipe';
 
+
 import {Store} from '../store';
 
 const ROUTES: Routes = [
   {
     path: 'pokedex',
     children: [
-      {path: '', component: PokedexlistComponent, pathMatch:'full'},
+      {path: '', component: PokedexContainerComponent},
       {path:':name/:id', component: PokemonDetailComponent}
     ]
   }
@@ -28,13 +30,14 @@ const ROUTES: Routes = [
 
 @NgModule({
   declarations: [
+    PokeLoaderComponent,
     PokedexlistComponent,
     PokemonCardComponent,
     PokemonDetailComponent,
     PokemonAbilityInfoComponent,
     WeightPipe,
     HeightPipe,
-    PokeLoaderComponent
+    PokedexContainerComponent
   ],
   imports: [
     CommonModule,
@@ -42,8 +45,8 @@ const ROUTES: Routes = [
     RouterModule.forChild(ROUTES)
   ],
   exports: [
-    PokedexlistComponent,
-    PokemonCardComponent
+    PokemonCardComponent,
+    PokedexContainerComponent
   ],
   providers: [
     PokedexDashboardService,
