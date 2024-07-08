@@ -1,4 +1,4 @@
-<div class="flex">
+<div class="flex flex-col">
     <div class="flex-1">
         <ul class="flex flex-wrap justify-center mx-auto" *ngIf="pokedexResults">
             <li class="pokemon-figure mx-3 mb-12" *ngFor="let pokemon of pokedexResults.results">
@@ -16,6 +16,11 @@
             <div class="blur-[2px] bg-slate-200 shadow-slate-50 w-[215px] h-[215px] mx-3 rounded-[5px]"></div>
         </div> -->
     </div>
+    <a class="w-fit m-auto shadow bg-blue-400 
+hover:bg-blue-700 focus:shadow-outline focus:outline-none 
+text-white py-2 px-4 rounded justify-end"
+(click)="loadMore()"
+>Load More</a>
 </div>
 
 <router-outlet></router-outlet>

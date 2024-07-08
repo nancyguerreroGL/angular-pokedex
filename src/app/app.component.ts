@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   async onLogout() {
      await this.authService.logoutUser();
-     this.router.navigate(['/auth/login'])
+     this.router.navigate([''])
   }
 
 }

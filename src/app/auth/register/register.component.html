@@ -1,13 +1,15 @@
-<auth-form (submitted)="registerUser($event)">
-    <h1 class="text-[125%] text-[#919191]">Register</h1>
-    <button class="shadow bg-green-600 hover:bg-green-700 focus:shadow-outline 
-    focus:outline-none text-white py-2 px-4 rounded" type="submit">
-       Register
-    </button>
-    <a class="shadow bg-blue-400 
-    hover:bg-blue-700 focus:shadow-outline focus:outline-none 
-    text-white py-2 px-4 rounded justify-end" routerLink="/auth/login">Already have an account?</a>
-    <div *ngIf="error" class="error">
-        {{error}}
-    </div>
-</auth-form>
+<div class="container pokedex">
+    <auth-form class="w-4/5 flex m-auto" (submitted)="registerUser($event)">
+        <h1 class="text-[125%] text-[#919191]">Register</h1>
+        <button class="shadow bg-green-600 hover:bg-green-700 focus:shadow-outline 
+        focus:outline-none text-white py-2 px-4 rounded" type="submit">
+           Register
+        </button>
+        <a class="shadow bg-blue-400 
+        hover:bg-blue-700 focus:shadow-outline focus:outline-none 
+        text-white py-2 px-4 rounded justify-end" routerLink="">Already have an account?</a>
+        <div *ngIf="error" class="error">
+            {{error}}
+        </div>
+    </auth-form>
+</div>

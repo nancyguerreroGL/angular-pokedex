@@ -13,13 +13,13 @@ import { Router } from '@angular/router';
 })
 
 
-export class PokedexContainerComponent implements OnInit,  AfterViewInit{
+export class PokedexContainerComponent implements OnInit{
 
-  pageByScroll$ = fromEvent(window, 'scroll');
   pokedexPaginationUrl?: string;
   showLoadMore: boolean = true;
   showLoader: boolean = true;
-  pokedexResults: any;
+  pokedexResultsObs!: Observable<any>;
+
 
 
   constructor( private pokedexService: PokedexDashboardService,
@@ -27,41 +27,18 @@ export class PokedexContainerComponent implements OnInit,  AfterViewInit{
 
 
   ngOnInit(): void {
-    this.loadMorePokemon()
+   this.pokedexResultsObs = this.pokedexService.getPokemonList()
  }
 
- ngAfterViewInit(){
-  this.pageByScroll$.pipe(
-     map(()=> window.scrollY),
-     filter((current)=> current >= document.body.clientHeight - window.innerHeight),
-     debounceTime(200),
-   ).subscribe((data)=> {
-     this.loadMorePokemon()
-   })
+
+
+ onLoadmore() {
+  this.loadMorePokemon()
  }
 
  loadMorePokemon() {
-   this.pokedexService.getPokemonList().subscribe((data) => {
-       if(data.results.length > 0 ) {
-         this.showLoader = false
-       }
-       this.pokedexResults = data
-       console.log('data', data)
-   })
+  this.pokedexResultsObs = this.pokedexService.getPokemonList()
  }
 
-  
 
-  calculateScrollPercent(target: any) {
-    const {
-      target: {
-        scrollingElement: {
-          scrollTop, 
-          scrollHeight, 
-          clientHeight
-        }
-      }
-    } = target
-    return (scrollTop/(scrollHeight-clientHeight))*100
-  } 
 }

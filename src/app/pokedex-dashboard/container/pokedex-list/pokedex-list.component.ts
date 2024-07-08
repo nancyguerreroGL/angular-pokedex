@@ -1,7 +1,6 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import  {PokedexDashboardService} from '../../pokedex-dahsboard.service';
 import { PokemonDetail, Pokemon } from '../../models/pokemon.interface';
-import { map, filter, debounceTime, mergeMap, delay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { fromEvent, Observable} from 'rxjs';
 import { Store } from '../../../store';
@@ -16,14 +15,13 @@ export class PokedexlistComponent implements OnInit {
   showLoadMore: boolean = true;
   showLoader: boolean = true;
   private _pokedexResults: any = null;
+  @Output() loadMoreResults = new EventEmitter();
   @Input('pokedexResults')
   get pokedexResults() {
     return this._pokedexResults
   }
 
   set pokedexResults(value) {
-    console.log('value', value)
-
     if(value) {
       this._pokedexResults = value
     }
@@ -39,7 +37,10 @@ export class PokedexlistComponent implements OnInit {
     private store: Store
     ) { }
 
-
+  
+  loadMore() {
+    this.loadMoreResults.emit()
+  }
 
   handleView(event: PokemonDetail) {
     console.log('event', event)

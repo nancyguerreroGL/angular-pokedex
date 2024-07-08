@@ -1,11 +1,11 @@
 <div class="justify-center items-center container flex pokedex max-w-md">
  <section class="items-center md:container md:mx-auto h-full">
-   <div class="pokemon-results w-4/5 mx-auto" *ngIf="pokedexResults && pokedexResults.results">
-    <pokedex-list [pokedexResults]="pokedexResults" ></pokedex-list>
+   <div *ngIf="pokedexResultsObs | async as pokedexResults; else loading"  class="pokemon-results w-4/5 mx-auto">
+    <pokedex-list (loadMoreResults)="onLoadmore()" [pokedexResults]="pokedexResults" ></pokedex-list>
    </div>
-   <div class="flex justify-center items-center h-full">
-    <poke-loader *ngIf="showLoader"></poke-loader>
-   </div>
+   <ng-template #loading>
+      <poke-loader></poke-loader>
+  </ng-template> 
  </section>
 </div>
 <router-outlet></router-outlet>
