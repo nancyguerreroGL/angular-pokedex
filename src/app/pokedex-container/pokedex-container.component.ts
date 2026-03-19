@@ -1,5 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import  {PokedexDashboardService} from '../pokedex-dashboard/passenger-dahsboard.service';
+import  {PokedexDashboardService} from '../pokedex-dashboard/pokedex-dashboard.service';
 
 @Component({
   selector: 'pokedex-container',
