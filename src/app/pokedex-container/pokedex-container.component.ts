@@ -8,7 +8,7 @@ import  {PokedexDashboardService} from '../pokedex-dashboard/passenger-dahsboard
 })
 export class PokedexContainerComponent implements OnInit {
   pokemonList: any[] = [];
-
+  isLoading = true;
 
   constructor(private pokedexService: PokedexDashboardService, private ngZone: NgZone) { }
 
@@ -16,6 +16,7 @@ export class PokedexContainerComponent implements OnInit {
     this.pokedexService.getPokemon().subscribe((pokemonList) => {
       this.ngZone.run(() => {
         this.pokemonList = pokemonList;
+        this.isLoading = false;
       });
     });
   }
