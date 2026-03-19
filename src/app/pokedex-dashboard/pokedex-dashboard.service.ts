@@ -6,10 +6,16 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 
 const POKEDEX_API = 'https://pokeapi.co/api/v2/pokemon/';
 const POKEDEX_IMAGE_BASE_URL = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/';
+const DEFAULT_LIMIT = 24;
 
 const getPokedexImageUrl = (id: number): string => {
     return `${POKEDEX_IMAGE_BASE_URL}${String(id).padStart(3, '0')}.png`;
 };
+
+export interface PokemonPage {
+    pokemon: PokemonDetail[];
+    hasMore: boolean;
+}
 
 @Injectable({
     providedIn: 'root'
@@ -17,8 +23,8 @@ const getPokedexImageUrl = (id: number): string => {
 export class PokedexDashboardService {
     constructor(private http: HttpClient){}
 
-    getPokemon(): Observable<PokemonDetail[]> {
-        return this.http.get<Pokemon>(POKEDEX_API).pipe(
+    getPokemon(limit: number = DEFAULT_LIMIT, offset: number = 0): Observable<PokemonPage> {
+        return this.http.get<Pokemon>(`${POKEDEX_API}?limit=${limit}&offset=${offset}`).pipe(
             switchMap((response) => {
                 const detailRequests = response.results.map((item) =>
                     this.http.get<PokemonDetail>(`${POKEDEX_API}${item.name}`).pipe(
@@ -29,12 +35,16 @@ export class PokedexDashboardService {
                         catchError(() => of(null))
                     )
                 );
-                return forkJoin(detailRequests);
+                return forkJoin(detailRequests).pipe(
+                    map((results) => ({
+                        pokemon: results.filter((item): item is PokemonDetail => item !== null),
+                        hasMore: response.next !== null,
+                    }))
+                );
             }),
-            map((results) => results.filter((item): item is PokemonDetail => item !== null)),
             catchError((error) => {
                 console.error('getPokemon error:', error);
-                return of([]);
+                return of({ pokemon: [], hasMore: false });
             })
         );
     }
