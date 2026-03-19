@@ -1,10 +1,10 @@
-export interface Pokemon {
-  results: PokemonDetail[],
-}
-
-export interface abilitie {
+export interface PokemonListItem {
   name: string,
   url: string,
+}
+
+export interface Pokemon {
+  results: PokemonListItem[],
 }
 
 export interface PokemonDetail {
@@ -15,7 +15,7 @@ export interface PokemonDetail {
   height: number,
   held_items: [],
   id: number,
-  imageUrl: object,
+  imageUrl: string,
   is_default: boolean,
   location_area_encounters: string,
   moves: [],

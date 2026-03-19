@@ -1,8 +1,10 @@
-<ul class="pokemon-results">
-    <li class="pokemon-figure" *ngFor="let pokemon of pokemonDetail">
+<ul *ngIf="pokemonList && pokemonList.length > 0" class="pokemon-results">
+    <li class="pokemon-figure" *ngFor="let pokemon of pokemonList">
         <pokemon-detail [detail]="pokemon"></pokemon-detail>
         <div class="pokemon-detail">
             <h5>{{pokemon.name}}</h5>
         </div>
     </li>
 </ul>
+
+<p>pokemonList.length {{ pokemonList?.length}}</p>

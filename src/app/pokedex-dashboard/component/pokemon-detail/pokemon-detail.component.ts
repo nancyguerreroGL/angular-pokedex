@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Pokemon, abilitie, PokemonDetail } from '../../models/pokemon.interface'
+import { PokemonDetail } from '../../models/pokemon.interface'
 
 
 @Component({
