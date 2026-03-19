@@ -1,3 +1,29 @@
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4em 0;
+
+    .pokeball-loader {
+        width: 80px;
+        height: 80px;
+        animation: spin 1s linear infinite;
+    }
+
+    .loader-text {
+        margin-top: 1em;
+        font-size: 1rem;
+        color: #555;
+        font-family: 'Pokemon Solid', sans-serif;
+    }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
 ul {
     display: flex;
     flex-wrap: wrap;
