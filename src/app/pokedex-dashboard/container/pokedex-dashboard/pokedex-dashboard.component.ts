@@ -9,6 +9,7 @@ import { PokemonDetail } from '../../models/pokemon.interface';
 })
 export class PokedexDashboardComponent implements OnInit, OnChanges {
   @Input() pokemonList: PokemonDetail[] = [];
+  @Input() isLoading = false;
 
   constructor(private pokedexService: PokedexDashboardService) { }
 
