@@ -107,7 +107,6 @@
       }
     }
   },
-  "defaultProject": "my-app",
   "cli": {
     "cache": {
       "enabled": false
