@@ -1,3 +1,9 @@
 <div class="container pokedex">
-<pokedex-dashboard [pokemonList]="pokemonList" [isLoading]="isLoading"></pokedex-dashboard>
+  <pokedex-dashboard
+    [pokemonList]="pokemonList"
+    [isLoading]="isLoading"
+    [isLoadingMore]="isLoadingMore"
+    [hasMore]="hasMore"
+    (loadMore)="loadMore()">
+  </pokedex-dashboard>
 </div>

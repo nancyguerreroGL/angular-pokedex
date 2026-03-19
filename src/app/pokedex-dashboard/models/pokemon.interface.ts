@@ -4,6 +4,8 @@ export interface PokemonListItem {
 }
 
 export interface Pokemon {
+  count: number,
+  next: string | null,
   results: PokemonListItem[],
 }
 
