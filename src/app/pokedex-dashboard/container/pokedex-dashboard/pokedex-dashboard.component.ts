@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import  {PokedexDashboardService} from '../../passenger-dahsboard.service';
+import  {PokedexDashboardService} from '../../pokedex-dashboard.service';
 import { PokemonDetail } from '../../models/pokemon.interface';
 
 @Component({
