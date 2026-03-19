@@ -1,50 +1,42 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse} from '@angular/common/http';
-import { Pokemon, abilitie, PokemonDetail } from './models/pokemon.interface';
-import { forkJoin, Observable, throwError } from 'rxjs';
-import { HttpErrorHandler, HandleError } from '../../http-error-handler.service';
-import { catchError, map, mergeMap, retry, switchMap, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Pokemon, PokemonDetail } from './models/pokemon.interface';
+import { forkJoin, Observable, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 const POKEDEX_API = 'https://pokeapi.co/api/v2/pokemon/';
-const POKEDEX_IMAGE_BASE_URL = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"
-const POKEDEX_IMAGE_FORMAT = '.png';
-const getImageZeroDigit = (value: string) => {
-    return value.length < 2? `${POKEDEX_IMAGE_BASE_URL}00${value}`: `${POKEDEX_IMAGE_BASE_URL}0${value}`
+const POKEDEX_IMAGE_BASE_URL = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/';
+
+const getPokedexImageUrl = (id: number): string => {
+    return `${POKEDEX_IMAGE_BASE_URL}${String(id).padStart(3, '0')}.png`;
 };
 
-const getPokedex_image_base_number = (value: number) => {
-    const convertId = value.toString();
-    if(convertId.length < 3) {
-        return getImageZeroDigit(convertId)
-    }
-    return `${POKEDEX_IMAGE_BASE_URL}`;
-};
-
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class PokedexDashboardService {
     constructor(private http: HttpClient){}
-    getPokemon(): Observable<any> {
 
-        // get the items
-       return this.http.get<Pokemon>(POKEDEX_API).pipe(
-            switchMap((items) => {
-            const results = items.results
-            const itemRequests = results.map((item) => this.http.get(`${POKEDEX_API}${item.name}`).pipe(
-                map((item: any) => {
-                    console.log('item', item)
-                    return {
-                        ...item,
-                        imageUrl: `${getPokedex_image_base_number(item.id)}${POKEDEX_IMAGE_FORMAT}`
-                    }
-                })
-            ));
-            return forkJoin(itemRequests).pipe(
-                map((itemRequests) => {
-                    return itemRequests
-                })
-            );
+    getPokemon(): Observable<PokemonDetail[]> {
+        return this.http.get<Pokemon>(POKEDEX_API).pipe(
+            switchMap((response) => {
+                const detailRequests = response.results.map((item) =>
+                    this.http.get<PokemonDetail>(`${POKEDEX_API}${item.name}`).pipe(
+                        map((detail) => ({
+                            ...detail,
+                            imageUrl: getPokedexImageUrl(detail.id)
+                        })),
+                        catchError(() => of(null))
+                    )
+                );
+                return forkJoin(detailRequests);
+            }),
+            map((results) => results.filter((item): item is PokemonDetail => item !== null)),
+            catchError((error) => {
+                console.error('getPokemon error:', error);
+                return of([]);
             })
         );
-    };
+    }
 }
 

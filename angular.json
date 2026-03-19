@@ -107,5 +107,10 @@
       }
     }
   },
-  "defaultProject": "my-app"
+  "defaultProject": "my-app",
+  "cli": {
+    "cache": {
+      "enabled": false
+    }
+  }
 }

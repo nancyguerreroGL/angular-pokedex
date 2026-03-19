@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import  {PokedexDashboardService} from '../../passenger-dahsboard.service';
-import { Pokemon, PokemonDetail } from '../../models/pokemon.interface';
+import { PokemonDetail } from '../../models/pokemon.interface';
 
 @Component({
   selector: 'pokedex-dashboard',
   templateUrl: './pokedex-dashboard.component.html',
   styleUrls: ['./pokedex-dashboard.component.scss']
 })
-export class PokedexDashboardComponent implements OnInit {
-  pokemonDetail: PokemonDetail[] = [];
+export class PokedexDashboardComponent implements OnInit, OnChanges {
+  @Input() pokemonList: PokemonDetail[] = [];
 
   constructor(private pokedexService: PokedexDashboardService) { }
 
   ngOnInit(): void {
-    this.pokedexService.getPokemon()
-    .subscribe(response=> {
-      this.pokemonDetail = response;
-      console.log('response', response)
-    })
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['pokemonList']) {
+      console.log('pokemonList updated', this.pokemonList);
+    }
   }
 
 }
