@@ -4,7 +4,9 @@ export interface PokemonListItem {
 }
 
 export interface Pokemon {
-  results: PokemonListItem[],
+  count: number;
+  next: string | null;
+  results: PokemonListItem[];
 }
 
 export interface PokemonDetail {
