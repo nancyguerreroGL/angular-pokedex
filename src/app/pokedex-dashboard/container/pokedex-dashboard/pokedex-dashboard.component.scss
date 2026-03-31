@@ -37,4 +37,45 @@ ul {
     to { transform: rotate(360deg); }
 }
 
+.load-more-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+}
 
+.loader-container--inline {
+    padding: 1rem;
+}
+
+.pokeball-loader--small {
+    width: 48px;
+    height: 48px;
+}
+
+.load-more-btn {
+    background-color: #e3350d;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: #b52a0a;
+    }
+
+    &:active {
+        background-color: #8a1f07;
+    }
+}
+
+.all-loaded-text {
+    font-size: 1rem;
+    color: #666;
+    font-style: italic;
+}

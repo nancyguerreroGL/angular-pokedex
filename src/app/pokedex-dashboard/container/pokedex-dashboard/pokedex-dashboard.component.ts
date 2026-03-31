@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import  {PokedexDashboardService} from '../../pokedex-dashboard.service';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { PokedexDashboardService } from '../../pokedex-dashboard.service';
 import { PokemonDetail } from '../../models/pokemon.interface';
 
 @Component({
@@ -10,6 +10,9 @@ import { PokemonDetail } from '../../models/pokemon.interface';
 export class PokedexDashboardComponent implements OnInit, OnChanges {
   @Input() pokemonList: PokemonDetail[] = [];
   @Input() isLoading = false;
+  @Input() isLoadingMore = false;
+  @Input() hasMore = true;
+  @Output() loadMore = new EventEmitter<void>();
 
   constructor(private pokedexService: PokedexDashboardService) { }
 
@@ -22,4 +25,7 @@ export class PokedexDashboardComponent implements OnInit, OnChanges {
     }
   }
 
+  onLoadMore(): void {
+    this.loadMore.emit();
+  }
 }

@@ -11,15 +11,23 @@ const getPokedexImageUrl = (id: number): string => {
     return `${POKEDEX_IMAGE_BASE_URL}${String(id).padStart(3, '0')}.png`;
 };
 
+export interface PokemonPage {
+    pokemon: PokemonDetail[];
+    hasMore: boolean;
+}
+
 @Injectable({
     providedIn: 'root'
 })
 export class PokedexDashboardService {
     constructor(private http: HttpClient){}
 
-    getPokemon(): Observable<PokemonDetail[]> {
-        return this.http.get<Pokemon>(POKEDEX_API).pipe(
+    getPokemon(limit: number = 24, offset: number = 0): Observable<PokemonPage> {
+        return this.http.get<Pokemon>(`${POKEDEX_API}?limit=${limit}&offset=${offset}`).pipe(
             switchMap((response) => {
+                if (response.results.length === 0) {
+                    return of({ pokemon: [], hasMore: false });
+                }
                 const detailRequests = response.results.map((item) =>
                     this.http.get<PokemonDetail>(`${POKEDEX_API}${item.name}`).pipe(
                         map((detail) => ({
@@ -29,14 +37,17 @@ export class PokedexDashboardService {
                         catchError(() => of(null))
                     )
                 );
-                return forkJoin(detailRequests);
+                return forkJoin(detailRequests).pipe(
+                    map((results) => ({
+                        pokemon: results.filter((item): item is PokemonDetail => item !== null),
+                        hasMore: !!response.next
+                    }))
+                );
             }),
-            map((results) => results.filter((item): item is PokemonDetail => item !== null)),
             catchError((error) => {
                 console.error('getPokemon error:', error);
-                return of([]);
+                return of({ pokemon: [], hasMore: false });
             })
         );
     }
 }
-
